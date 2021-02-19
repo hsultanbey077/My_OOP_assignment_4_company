@@ -1,24 +1,26 @@
-package com.company.MyApp;
+package com.company;
 
-public class Employees  {
+public class Employees  { //create entities for our project
     private int id;
     private int age;
     private String name;
     private int price;
     private String job;
-    public Employees(int id,int age, String name){
+    public Employees(){}  // create the first empty constructor
+    public Employees(int id,int age, String name){ // crate the second constructor
         setId(id);
         setName(name);
         setAge(age);
 
     }
-    public Employees(int id,int age, String name,int price, String job){
+    public Employees(int id,int age, String name,int price, String job){ // create the third constructor
         setId(id);
         setName(name);
         setAge(age);
         setPrice(price);
         setJob(job);
     }
+    // creating getters and setters
     public int getId() {
         return id;
     }
@@ -62,7 +64,7 @@ public class Employees  {
 
 
     @Override
-    public String toString(){
+    public String toString(){ // toString method
         return "Employee{" + '\n'+
                 "id= "+ id+ '\n'+
                 "age= "+age+ '\n'+

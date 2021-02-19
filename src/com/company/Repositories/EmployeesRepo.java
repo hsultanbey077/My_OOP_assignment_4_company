@@ -1,7 +1,7 @@
-package com.company.MyApp.Repositories;
-import com.company.MyApp.DATA.interfaces.IDB;
-import com.company.MyApp.Employees;
-import com.company.MyApp.Repositories.IRepo.IEmployeeRepo;
+package com.company.Repositories;
+import com.company.DATA.interfaces.IDB;
+import com.company.Employees;
+import com.company.Repositories.IRepo.IEmployeeRepo;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -15,11 +15,11 @@ public class EmployeesRepo implements IEmployeeRepo {
 
 
     @Override
-    public boolean createEmployee(Employees employee) {
+    public boolean createEmployee(Employees employee) {// method fro creating user
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "INSERT INTO employee(id,age,name,price,job) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO employee(id,age,name,price,job) VALUES (?,?,?,?,?)";//query for creating user
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1,employee.getId());
             st.setInt(2, employee.getAge());
@@ -43,11 +43,11 @@ public class EmployeesRepo implements IEmployeeRepo {
     }
 
     @Override
-    public Employees getEmployeeById(int id) {
+    public Employees getEmployeeById(int id) {//method for getting information by id
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,age,name,price,job FROM employee WHERE id=?";
+            String sql = "SELECT id,age,name,price,job FROM employee WHERE id=?";//query for this method
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setInt(1, id);
@@ -76,16 +76,16 @@ public class EmployeesRepo implements IEmployeeRepo {
     }
 
     @Override
-    public List<Employees> getAllEmployees() {
+    public List<Employees> getAllEmployees() {//getting all users from table
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,age,name,price,job FROM employee";
+            String sql = "SELECT id,age,name,price,job FROM employee";//query for this method
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
             List<Employees> employees = new LinkedList<>();
-            while (rs.next()) {
+            while (rs.next()) {//getting all columns
                 Employees employee = new Employees(rs.getInt("id"),
                         rs.getInt("age"),
                         rs.getString("name"),
@@ -111,14 +111,14 @@ public class EmployeesRepo implements IEmployeeRepo {
     }
 
     @Override
-    public Employees deleteById(int id) {
+    public Employees deleteById(int id) {//method for deleting users from table
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "DELETE FROM employee WHERE id=?";
+            String sql = "DELETE FROM employee WHERE id=?";//it is query for this method
             PreparedStatement st = con.prepareStatement(sql);
 
-            st.setInt(1, id);
+            st.setInt(1, id);//specify which id
 
             st.execute();
 
@@ -141,12 +141,12 @@ public class EmployeesRepo implements IEmployeeRepo {
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,age,name,price,job FROM employee WHERE job='frontend'";
+            String sql = "SELECT id,age,name,price,job FROM employee WHERE job='frontend'";// it is query for getting frontend developers
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
             List<Employees> employees = new LinkedList<>();
-            while (rs.next()) {
+            while (rs.next()) {//loop for getting information from table
                 Employees employee = new Employees(rs.getInt("id"),
                         rs.getInt("age"),
                         rs.getString("name"),
@@ -172,16 +172,16 @@ public class EmployeesRepo implements IEmployeeRepo {
     }
 
     @Override
-    public List<Employees> getAllBackends() {
+    public List<Employees> getAllBackends() { // method for getting all backend developers
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT id,age,name,price,job FROM employee WHERE job='backend'";
+            String sql = "SELECT id,age,name,price,job FROM employee WHERE job='backend'";// it is query fro getting infromation
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
             List<Employees> employees = new LinkedList<>();
-            while (rs.next()) {
+            while (rs.next()) {// loop for getting information from table
                 Employees employee = new Employees(rs.getInt("id"),
                         rs.getInt("age"),
                         rs.getString("name"),
@@ -208,15 +208,15 @@ public class EmployeesRepo implements IEmployeeRepo {
     }
 
     @Override
-    public int TotalCost() {
+    public int TotalCost() { // method for getting sum of  salaries from table
         Connection con = null;
         try {
             con = db.getConnection();
-            String sql = "SELECT price FROM employee";
+            String sql = "SELECT price FROM employee"; // it is query
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             int response = 0;
-            if (rs.next()) {
+            while (rs.next()) { //loop for getting salaries
                 response=response+rs.getInt("price");
             }return response;
         } catch (SQLException throwables) {

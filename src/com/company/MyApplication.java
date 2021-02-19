@@ -1,10 +1,10 @@
-package com.company.MyApp;
-import com.company.MyApp.Controller.EmployeeController;
+package com.company;
+import com.company.Controller.EmployeeController;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MyApplication {
+public class MyApplication { //frontend of our application
     private final EmployeeController controller;
     private final Scanner scanner;
 
@@ -13,7 +13,7 @@ public class MyApplication {
         scanner = new Scanner(System.in);
     }
 
-    public void start() {
+    public void start() {//options of my applications
         while (true) {
             System.out.println();
             System.out.println("Welcome to My Application");
@@ -27,7 +27,7 @@ public class MyApplication {
             System.out.println("7. The sum of prices");
             System.out.println("0. Exit");
             System.out.println();
-            try {
+            try {//it is how works my options
                 System.out.print("Enter option (1-7): ");
                 int option = scanner.nextInt();
                 if (option == 1) {
@@ -58,7 +58,7 @@ public class MyApplication {
 
         }
     }
-
+    //it is functions for working application
     public void getAllEmployeesMenu() {
         String response = controller.getAllEmployees();
         System.out.println(response);
